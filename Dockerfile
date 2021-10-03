@@ -8,7 +8,7 @@ RUN apt-get upgrade -y
 RUN dpkg-reconfigure ca-certificates
 USER node 
 RUN mkdir -p ~/node/.npm-global
-ENV PATH="~/.npm-global:${PATH}"
+ENV PATH="~/.npm-global/bin:${PATH}"
 RUN npm config set prefix '~/.npm-global'
 RUN npm install -g node-pre-gyp
 RUN npm install -g meteor
