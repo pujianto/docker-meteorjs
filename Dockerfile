@@ -13,9 +13,7 @@ RUN mkdir -p /app && chown -R 1001:1001 /app
 USER ubuntu
 RUN mkdir -p /home/ubuntu/.local/bin
 RUN RUN curl -s https://install.meteor.com/?release=${METEOR_VERSION} | sh
-RUN NODE="$(find /home/ubuntu/.meteor/ -path '*bin/node' | grep '/.meteor/packages/meteor-tool/' | sort | head -n 1)" && \ 
-ln -s "${NODE}" /home/ubuntu/.local/bin/node && \ 
-ln -s $(dirname "${NODE}")/npm /home/ubuntu/.local/bin/npm
+RUN NODE="$(find /home/ubuntu/.meteor/ -path '*bin/node' | grep '/.meteor/packages/meteor-tool/' | sort | head -n 1)" && ln -s "${NODE}" /home/ubuntu/.local/bin/node && ln -s $(dirname "${NODE}")/npm /home/ubuntu/.local/bin/npm
 RUN export PATH=$PATH:/root/.meteor/:/home/ubuntu/.local/bin
 WORKDIR /app
 VOLUME /app
