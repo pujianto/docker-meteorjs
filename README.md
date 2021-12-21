@@ -1,9 +1,7 @@
 # Unofficial Meteorjs Docker Image
 
-This docker image is based on `node:12.18.3` image. 
-Mostly used for local development or CI/CD pipeline.
-
-This docker image is updated every midnight.
+A base Meteor docker image.
+Run as `ubuntu` user. Meteor libraries located in `/home/ubuntu/.meteor`, project workdir located in `/app` 
 
 #### Available tags:
 - `latest`
