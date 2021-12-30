@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  mongodb:
+    image: "mongo:4"
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongo_data:/data/db"
+  api:
+    image: "pujianto/meteorjs:latest"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./:/app"
+    depends_on:
+      - mongodb
+    command: bash -c "(find -- '/app/node_modules' -prune -type d -empty | grep -q '^' && meteor npm install); meteor --port 3000 --settings /app/settings.json"
+    
+volumes:
+  mongo_data:
+    driver: local
+networks:
+  meteor:
+    driver: bridge
