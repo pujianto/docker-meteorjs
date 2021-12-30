@@ -14,7 +14,7 @@ RUN useradd -rm -d /home/ubuntu -s /bin/bash -g 0 -G ubuntu -u 1000 ubuntu
 RUN mkdir -p /app && chown -R ubuntu:ubuntu /app
 USER ubuntu
 RUN mkdir -p /home/ubuntu/.local/bin
-RUN curl -s https://install.meteor.com/?release=${METEOR_VERSION} | sed -e 's#PREFIX="/usr/local"#PREFIX="/home/ubuntu/.local"#g' | sh
+RUN ([[ "${METEOR_VERSION}" == "latest" ]] && METEOR_VERSION= ); curl -s https://install.meteor.com/?release=${METEOR_VERSION} | sed -e 's#PREFIX="/usr/local"#PREFIX="/home/ubuntu/.local"#g' | sh
 RUN NODE="$(find /home/ubuntu/.meteor/ -path '*bin/node' | grep '/.meteor/packages/meteor-tool/' | sort | head -n 1)" && ln -s "${NODE}" /home/ubuntu/.local/bin/node && ln -s $(dirname "${NODE}")/npm /home/ubuntu/.local/bin/npm
 env PATH $PATH:/home/ubuntu/.local/bin:/home/ubuntu/.meteor/
 WORKDIR /app
